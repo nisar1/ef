@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EF6RecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EF6RecipesModelStoreContainer">
+          <EntitySet Name="Meter" EntityType="EF6RecipesModel.Store.Meter" store:Type="Tables" Schema="Chapter2" />
+          <EntitySet Name="Poem" EntityType="EF6RecipesModel.Store.Poem" store:Type="Tables" Schema="Chapter2" />
+          <EntitySet Name="Poet" EntityType="EF6RecipesModel.Store.Poet" store:Type="Tables" Schema="Chapter2" />
+          <EntitySet Name="vwLibrary" EntityType="EF6RecipesModel.Store.vwLibrary" store:Type="Views" store:Schema="Chapter2" store:Name="vwLibrary">
+            <DefiningQuery>SELECT 
+      [vwLibrary].[FirstName] AS [FirstName], 
+      [vwLibrary].[MiddleName] AS [MiddleName], 
+      [vwLibrary].[LastName] AS [LastName], 
+      [vwLibrary].[Title] AS [Title], 
+      [vwLibrary].[MeterName] AS [MeterName]
+      FROM [Chapter2].[vwLibrary] AS [vwLibrary]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Poem_Meter" Association="EF6RecipesModel.Store.FK_Poem_Meter">
+            <End Role="Meter" EntitySet="Meter" />
+            <End Role="Poem" EntitySet="Poem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poem_Poet" Association="EF6RecipesModel.Store.FK_Poem_Poet">
+            <End Role="Poet" EntitySet="Poet" />
+            <End Role="Poem" EntitySet="Poem" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Meter">
+          <Key>
+            <PropertyRef Name="MeterId" />
+          </Key>
+          <Property Name="MeterId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MeterName" Type="varchar" Nullable="false" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Poem">
+          <Key>
+            <PropertyRef Name="PoemId" />
+          </Key>
+          <Property Name="PoemId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PoetId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="MeterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Poet">
+          <Key>
+            <PropertyRef Name="PoetId" />
+          </Key>
+          <Property Name="PoetId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'EF6Recipes.Chapter2.vwLibrary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vwLibrary">
+          <Key>
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="MeterName" />
+          </Key>
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="MeterName" Type="varchar" Nullable="false" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_Poem_Meter">
+          <End Role="Meter" Type="EF6RecipesModel.Store.Meter" Multiplicity="1" />
+          <End Role="Poem" Type="EF6RecipesModel.Store.Poem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meter">
+              <PropertyRef Name="MeterId" />
+            </Principal>
+            <Dependent Role="Poem">
+              <PropertyRef Name="MeterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poem_Poet">
+          <End Role="Poet" Type="EF6RecipesModel.Store.Poet" Multiplicity="1" />
+          <End Role="Poem" Type="EF6RecipesModel.Store.Poem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poet">
+              <PropertyRef Name="PoetId" />
+            </Principal>
+            <Dependent Role="Poem">
+              <PropertyRef Name="PoetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EF6RecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EF6RecipesEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Meters" EntityType="EF6RecipesModel.Meter" />
+          <EntitySet Name="Poems" EntityType="EF6RecipesModel.Poem" />
+          <EntitySet Name="Poets" EntityType="EF6RecipesModel.Poet" />
+          <EntitySet Name="vwLibraries" EntityType="EF6RecipesModel.vwLibrary" />
+          <AssociationSet Name="FK_Poem_Meter" Association="EF6RecipesModel.FK_Poem_Meter">
+            <End Role="Meter" EntitySet="Meters" />
+            <End Role="Poem" EntitySet="Poems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Poem_Poet" Association="EF6RecipesModel.FK_Poem_Poet">
+            <End Role="Poet" EntitySet="Poets" />
+            <End Role="Poem" EntitySet="Poems" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Meter">
+          <Key>
+            <PropertyRef Name="MeterId" />
+          </Key>
+          <Property Name="MeterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeterName" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Poems" Relationship="EF6RecipesModel.FK_Poem_Meter" FromRole="Meter" ToRole="Poem" />
+        </EntityType>
+        <EntityType Name="Poem">
+          <Key>
+            <PropertyRef Name="PoemId" />
+          </Key>
+          <Property Name="PoemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PoetId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="MeterId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Meter" Relationship="EF6RecipesModel.FK_Poem_Meter" FromRole="Poem" ToRole="Meter" />
+          <NavigationProperty Name="Poet" Relationship="EF6RecipesModel.FK_Poem_Poet" FromRole="Poem" ToRole="Poet" />
+        </EntityType>
+        <EntityType Name="Poet">
+          <Key>
+            <PropertyRef Name="PoetId" />
+          </Key>
+          <Property Name="PoetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Poems" Relationship="EF6RecipesModel.FK_Poem_Poet" FromRole="Poet" ToRole="Poem" />
+        </EntityType>
+        <EntityType Name="vwLibrary">
+          <Key>
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="MeterName" />
+          </Key>
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="MeterName" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Poem_Meter">
+          <End Role="Meter" Type="EF6RecipesModel.Meter" Multiplicity="1" />
+          <End Role="Poem" Type="EF6RecipesModel.Poem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meter">
+              <PropertyRef Name="MeterId" />
+            </Principal>
+            <Dependent Role="Poem">
+              <PropertyRef Name="MeterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Poem_Poet">
+          <End Role="Poet" Type="EF6RecipesModel.Poet" Multiplicity="1" />
+          <End Role="Poem" Type="EF6RecipesModel.Poem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poet">
+              <PropertyRef Name="PoetId" />
+            </Principal>
+            <Dependent Role="Poem">
+              <PropertyRef Name="PoetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EF6RecipesModelStoreContainer" CdmEntityContainer="EF6RecipesEntities1">
+          <EntitySetMapping Name="Meters">
+            <EntityTypeMapping TypeName="EF6RecipesModel.Meter">
+              <MappingFragment StoreEntitySet="Meter">
+                <ScalarProperty Name="MeterId" ColumnName="MeterId" />
+                <ScalarProperty Name="MeterName" ColumnName="MeterName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Poems">
+            <EntityTypeMapping TypeName="EF6RecipesModel.Poem">
+              <MappingFragment StoreEntitySet="Poem">
+                <ScalarProperty Name="PoemId" ColumnName="PoemId" />
+                <ScalarProperty Name="PoetId" ColumnName="PoetId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MeterId" ColumnName="MeterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Poets">
+            <EntityTypeMapping TypeName="EF6RecipesModel.Poet">
+              <MappingFragment StoreEntitySet="Poet">
+                <ScalarProperty Name="PoetId" ColumnName="PoetId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwLibraries">
+            <EntityTypeMapping TypeName="EF6RecipesModel.vwLibrary">
+              <MappingFragment StoreEntitySet="vwLibrary">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MeterName" ColumnName="MeterName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

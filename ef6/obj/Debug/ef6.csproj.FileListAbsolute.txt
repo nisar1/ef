@@ -1,0 +1,7 @@
+c:\users\admin1\documents\visual studio 2012\Projects\ef6\ef6\bin\Debug\ef6.exe.config
+c:\users\admin1\documents\visual studio 2012\Projects\ef6\ef6\bin\Debug\ef6.exe
+c:\users\admin1\documents\visual studio 2012\Projects\ef6\ef6\bin\Debug\ef6.pdb
+c:\users\admin1\documents\visual studio 2012\Projects\ef6\ef6\bin\Debug\EntityFramework.xml
+c:\users\admin1\documents\visual studio 2012\Projects\ef6\ef6\obj\Debug\ef6.csprojResolveAssemblyReference.cache
+c:\users\admin1\documents\visual studio 2012\Projects\ef6\ef6\obj\Debug\ef6.exe
+c:\users\admin1\documents\visual studio 2012\Projects\ef6\ef6\obj\Debug\ef6.pdb
