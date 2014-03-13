@@ -5,3 +5,6 @@ c:\users\admin1\documents\visual studio 2012\Projects\ef6\ef6\bin\Debug\EntityFr
 c:\users\admin1\documents\visual studio 2012\Projects\ef6\ef6\obj\Debug\ef6.csprojResolveAssemblyReference.cache
 c:\users\admin1\documents\visual studio 2012\Projects\ef6\ef6\obj\Debug\ef6.exe
 c:\users\admin1\documents\visual studio 2012\Projects\ef6\ef6\obj\Debug\ef6.pdb
+F:\workspace\ef6 recipes\ef6\bin\Debug\ef6.exe.config
+F:\workspace\ef6 recipes\ef6\obj\Debug\ef6.exe
+F:\workspace\ef6 recipes\ef6\obj\Debug\ef6.pdb
